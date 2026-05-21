@@ -1,5 +1,5 @@
 async function carregar() {
-  const res = await fetch('http://localhost:3001/api/empresa');
+  const res = await fetch('http://18.116.164.51:3001/api/empresa');
   const data = await res.json();
 
   document.getElementById('nome').innerText = data.nome;
