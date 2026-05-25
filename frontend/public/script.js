@@ -1,14 +1,33 @@
-async function carregar() {
-  const res = await fetch('http://18.116.164.51:3001/api/empresa');
-  const data = await res.json();
-
-  document.getElementById('nome').innerText = data.nome;
-  document.getElementById('desc').innerText = data.descricao;
-  document.getElementById('endereco').innerText = data.endereco;
-  document.getElementById('telefone').innerText = data.telefone;
-  document.getElementById('email').innerText = data.email;
-  document.getElementById('colaboradores').innerText = data.colaboradores;
-  document.getElementById('entregas').innerText = data.entregasMes;
+function validarMetrica(valor) {
+  if (valor === null || valor === undefined || valor === '') return 'N/A';
+  const num = Number(valor);
+  if (isNaN(num) || num < 0) return 'N/A';
+  return String(num);
 }
 
-carregar();
+function atualizarDados(data) {
+  document.getElementById('nome').textContent = data.nome || '';
+  document.getElementById('desc').textContent = data.descricao || '';
+  document.getElementById('endereco').textContent = data.endereco || '';
+  document.getElementById('telefone').textContent = data.telefone || '';
+  document.getElementById('email').textContent = data.email || '';
+  document.getElementById('colaboradores').textContent = validarMetrica(data.colaboradores);
+  document.getElementById('entregas').textContent = validarMetrica(data.entregasMes);
+}
+
+async function carregar() {
+  try {
+    const res = await fetch('http://18.116.164.51:3001/api/empresa');
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    const data = await res.json();
+    atualizarDados(data);
+  } catch (err) {
+    console.error('Erro ao carregar dados:', err);
+  }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { atualizarDados, validarMetrica, carregar };
+} else {
+  carregar();
+}

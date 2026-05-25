@@ -1,0 +1,15 @@
+{
+  "name": "smarty-tests",
+  "version": "1.0.0",
+  "description": "Testes unitários e de integração — Smarty Entregas",
+  "scripts": {
+    "test": "node node_modules/jest/bin/jest.js --config jest.config.js",
+    "test:coverage": "node node_modules/jest/bin/jest.js --config jest.config.js --coverage"
+  },
+  "devDependencies": {
+    "express": "^4.22.2",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "supertest": "^6.3.4"
+  }
+}
