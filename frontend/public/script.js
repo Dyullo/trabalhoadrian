@@ -17,7 +17,7 @@ function atualizarDados(data) {
 
 async function carregar() {
   try {
-    const res = await fetch('http://18.116.164.51:30001/api/empresa');
+    const res = await fetch('http://3.15.28.93:30001/api/empresa');
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const data = await res.json();
     atualizarDados(data);
